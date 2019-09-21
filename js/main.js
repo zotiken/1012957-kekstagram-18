@@ -60,7 +60,7 @@ var commitsGeneration = function (params) {
 // --------- генерация описания фото -----------
 
 var generateDescriptionFoto = function (number) {
-  for (var e = 1; e < number; e++) {
+  for (var e = 1; e <= number; e++) {
     descriptionFotos.push({
       url:'photos/' +  e + '.jpg',
       description: descriptions[makeRandomValue(descriptions)],
