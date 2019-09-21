@@ -4,14 +4,12 @@ var templatePicture = document.querySelector('#picture')
 querySelector('.picture');
 
 var descriptionFotos = [];
-var urls = [1, 2, 3];
 var descriptions = [
   'шедевр',
   'модерн',
   'бездарность'
 ];
 
-var likes = [10, 9, 8];
 var comments = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -29,50 +27,49 @@ var names = [
   'Мифодий'
 ];
 
-//--------- рандомное елемент массива -----------
+// --------- рандомное елемент массива -----------
 
 
 var makeRandomValue = function (array) {
   return Math.round(Math.random() * (array.length - 1));
 };
 
-//--------- рандомное число с min и  max -----------
+// --------- рандомное число с min и  max -----------
 
 
 var randomInteger = function (min, max) {
   // получить случайное число от min до max
-  let rand = min + Math.random() * (max - min);
+  var rand = min + Math.random() * (max - min);
   return Math.round(rand);
-}
+};
 
-//--------- генерация коментариев -----------
+// --------- генерация коментариев -----------
 
 var commitsGeneration = function (params) {
   var arr = [];
-  for (let i = 0; i < params; i++) {
+  for (var i = 0; i < params; i++) {
     arr.push({
-      avatar: "img/avatar-" + randomInteger(1, 6) + ".svg",
+      avatar: 'img/avatar-' + randomInteger(1, 6) + '.svg',
       message: comments[makeRandomValue(comments)],
       name: names[makeRandomValue(names)]
     });
-  };
+  }
   return arr;
 };
 
-//--------- генерация описания фото -----------
+// --------- генерация описания фото -----------
 
 var generateDescriptionFoto = function (number) {
-  for (let i = 0; i < number; i++) {
+  for (var e = 0; e < number; i++) {
     descriptionFotos.push({
       url: i,
       description: descriptions[makeRandomValue(descriptions)],
       likes: randomInteger(15, 200),
       comments: commitsGeneration(randomInteger(1, 2))
     });
-  };
+  }
 };
 generateDescriptionFoto(25);
-console.log(descriptionFotos);
 
 var pictureBlokGeneration = function (params) {
 
