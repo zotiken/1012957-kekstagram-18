@@ -60,9 +60,9 @@ var commitsGeneration = function (params) {
 // --------- генерация описания фото -----------
 
 var generateDescriptionFoto = function (number) {
-  for (var e = 0; e < number; i++) {
+  for (var e = 0; e < number; e++) {
     descriptionFotos.push({
-      url: i,
+      url: e,
       description: descriptions[makeRandomValue(descriptions)],
       likes: randomInteger(15, 200),
       comments: commitsGeneration(randomInteger(1, 2))
@@ -83,8 +83,8 @@ var pictureBlokGeneration = function (params) {
 };
 
 var fragment = document.createDocumentFragment();
-for (var i = 0; i < descriptionFotos.length; i++) {
-  fragment.appendChild(pictureBlokGeneration(descriptionFotos[i]));
+for (var r = 0; r < descriptionFotos.length; r++) {
+  fragment.appendChild(pictureBlokGeneration(descriptionFotos[r]));
 }
 document.querySelector('.pictures').appendChild(fragment);
 
