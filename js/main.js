@@ -62,7 +62,7 @@ var commitsGeneration = function (params) {
 var generateDescriptionFoto = function (number) {
   for (var e = 1; e <= number; e++) {
     descriptionFotos.push({
-      url:'photos/' +  e + '.jpg',
+      url: 'photos/' + e + '.jpg',
       description: descriptions[makeRandomValue(descriptions)],
       likes: randomInteger(15, 200),
       comments: commitsGeneration(randomInteger(1, 2))
