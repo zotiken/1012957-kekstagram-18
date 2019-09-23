@@ -3,12 +3,12 @@ var templatePicture = document.querySelector('#picture')
   .content.
 querySelector('.picture');
 
+
 document.querySelector('.big-picture').classList.remove('hidden');
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
 document.querySelector('.comments-loader').classList.add('visually-hidden');
 
 var bigPictureImg = document.querySelector('.big-picture__img');
-
 
 var descriptionPhotos = [];
 var descriptions = [
@@ -95,6 +95,7 @@ for (var i = 0; i < descriptionPhotos.length; i++) {
 }
 document.querySelector('.pictures').appendChild(fragment);
 
+
 var bigPictureBlokGeneration = function (params) {
   document.querySelector('.likes-count').textContent = params.likes;
   bigPictureImg.querySelector('img').src = params.url;
@@ -115,3 +116,4 @@ var bigPictureBlokGeneration = function (params) {
 };
 
 bigPictureBlokGeneration(descriptionPhotos[randomInteger(0, 25)]);
+
