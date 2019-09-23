@@ -3,7 +3,7 @@ var templatePicture = document.querySelector('#picture')
   .content.
 querySelector('.picture');
 
-var descriptionFotos = [];
+var descriptionPhotos = [];
 var descriptions = [
   'шедевр',
   'модерн',
@@ -45,7 +45,7 @@ var randomInteger = function (min, max) {
 
 // --------- генерация коментариев -----------
 
-var commitsGeneration = function (params) {
+var commentsGeneration = function (params) {
   var arr = [];
   for (var i = 0; i < params; i++) {
     arr.push({
@@ -59,17 +59,17 @@ var commitsGeneration = function (params) {
 
 // --------- генерация описания фото -----------
 
-var generateDescriptionFoto = function (number) {
-  for (var e = 1; e <= number; e++) {
-    descriptionFotos.push({
-      url: 'photos/' + e + '.jpg',
+var generateDescriptionPhoto = function (number) {
+  for (var i = 1; i <= number; i++) {
+    descriptionPhotos.push({
+      url: 'photos/' + i + '.jpg',
       description: descriptions[makeRandomValue(descriptions)],
       likes: randomInteger(15, 200),
-      comments: commitsGeneration(randomInteger(1, 2))
+      comments: commentsGeneration(randomInteger(1, 2))
     });
   }
 };
-generateDescriptionFoto(25);
+generateDescriptionPhoto(25);
 
 var pictureBlokGeneration = function (params) {
 
@@ -83,8 +83,8 @@ var pictureBlokGeneration = function (params) {
 };
 
 var fragment = document.createDocumentFragment();
-for (var r = 0; r < descriptionFotos.length; r++) {
-  fragment.appendChild(pictureBlokGeneration(descriptionFotos[r]));
+for (var i = 0; i < descriptionPhotos.length; i++) {
+  fragment.appendChild(pictureBlokGeneration(descriptionPhotos[i]));
 }
 document.querySelector('.pictures').appendChild(fragment);
 
