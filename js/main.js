@@ -3,6 +3,13 @@ var templatePicture = document.querySelector('#picture')
   .content.
 querySelector('.picture');
 
+
+document.querySelector('.big-picture').classList.remove('hidden');
+document.querySelector('.social__comment-count').classList.add('visually-hidden');
+document.querySelector('.comments-loader').classList.add('visually-hidden');
+
+var bigPictureImg = document.querySelector('.big-picture__img');
+
 var descriptionPhotos = [];
 var descriptions = [
   'шедевр',
@@ -87,4 +94,26 @@ for (var i = 0; i < descriptionPhotos.length; i++) {
   fragment.appendChild(pictureBlokGeneration(descriptionPhotos[i]));
 }
 document.querySelector('.pictures').appendChild(fragment);
+
+
+var bigPictureBlokGeneration = function (params) {
+  document.querySelector('.likes-count').textContent = params.likes;
+  bigPictureImg.querySelector('img').src = params.url;
+  document.querySelector('.comments-count').textContent = params.comments.length;
+  var commentsList = document.querySelector('.social__comments').querySelectorAll('.social__comment');
+  for (var o = 0; o < commentsList.length; o++) {
+    if (commentsList.length <= params.comments.length) {
+      var index = o;
+    } else {
+      index = 0;
+    }
+    commentsList[o].querySelector('img').src = 'img/avatar-' + randomInteger(1, 6) + '.svg';
+    commentsList[o].querySelector('img').alt = params.comments[index].name;
+    commentsList[o].querySelector('.social__text').textContent = params.comments[index].message;
+  }
+
+  document.querySelector('.social__caption').textContent = params.description;
+};
+
+bigPictureBlokGeneration(descriptionPhotos[randomInteger(0, 25)]);
 
