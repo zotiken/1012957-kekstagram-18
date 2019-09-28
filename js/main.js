@@ -159,7 +159,7 @@ for (var i = 0; i < descriptionPhotos.length; i++) {
 document.querySelector('.pictures').appendChild(fragment);
 
 
-var bigPictureBlokGeneration = function (params) {
+var bigPictureBlockGeneration = function (params) {
   document.querySelector('.likes-count').textContent = params.likes;
   bigPictureImg.querySelector('img').src = params.url;
   document.querySelector('.comments-count').textContent = params.comments.length;
@@ -178,7 +178,7 @@ var bigPictureBlokGeneration = function (params) {
   document.querySelector('.social__caption').textContent = params.description;
 };
 
-bigPictureBlokGeneration(descriptionPhotos[randomInteger(0, 25)]);
+bigPictureBlockGeneration(descriptionPhotos[randomInteger(0, 25)]);
 
 // открытие редактора при изминении контрола загрузки
 
