@@ -29,6 +29,7 @@ var imgUploadCancel = document.querySelector('.img-upload__cancel');
 // пин слайдера редактора
 var effectLevelPin = document.querySelector('.effect-level__pin');
 
+
 var effectLevelValue = document.querySelector('.effect-level__value').getAttribute('value');
 
 
@@ -195,6 +196,7 @@ var applyFilter = function (params) {
 };
 
 
+
 var indicateNoSpace = function (param) {
   var index = 0;
   for (var v = 0; v < param.length; v++) {
@@ -240,10 +242,13 @@ var onValidInputHashtags = function () {
 textHashtags.addEventListener('change', onValidInputHashtags);
 
 textHashtags.addEventListener('keydown', function (evt) {
+
   if (evt.keyCode === 27) {
+
     evt.stopPropagation();
   }
 });
+
 
 
 var textDescription = document.querySelector('.text__description');
@@ -322,7 +327,6 @@ document.addEventListener('keydown', function (evt) {
   }
 });
 
-
 var openBigImageTab = function (b, a) {
   b.addEventListener('focus', function (evt) {
     if (evt.target === b) {
@@ -335,6 +339,7 @@ var openBigImageTab = function (b, a) {
     }
   });
 };
+
 
 var picture = document.querySelectorAll('.picture');
 
