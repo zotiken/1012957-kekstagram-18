@@ -29,6 +29,7 @@ var imgUploadCancel = document.querySelector('.img-upload__cancel');
 // пин слайдера редактора
 var effectLevelPin = document.querySelector('.effect-level__pin');
 
+
 var effectLevelValue = document.querySelector('.effect-level__value').getAttribute('value');
 
 
@@ -194,7 +195,6 @@ var applyFilter = function (params) {
   document.querySelector('.img-upload__preview').style.filter = countProportion(filter[params - 1], 100);
 };
 
-
 var indicateNoSpace = function (param) {
   var index = 0;
   for (var v = 0; v < param.length; v++) {
@@ -240,11 +240,19 @@ var onValidInputHashtags = function () {
 textHashtags.addEventListener('change', onValidInputHashtags);
 
 textHashtags.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === '27') {
+
+  if (evt.keyCode === 27) {
+
     evt.stopPropagation();
   }
 });
 
+var textDescription = document.querySelector('.text__description');
+textDescription.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 27) {
+    evt.stopPropagation();
+  }
+});
 
 var imgUpLoadEffects = document.querySelector('.img-upload__effects');
 
@@ -315,19 +323,22 @@ document.addEventListener('keydown', function (evt) {
   }
 });
 
-var picture = document.querySelectorAll('.picture');
-for (i = 0; i < picture.length; i++) {
-  picture[i].addEventListener('focus', function (evt) {
-    for (i = 0; i < picture.length; i++) {
-      if (evt.target === picture[i]) {
-        bigPictureBlockGeneration(descriptionPhotos[i]);
-      }
+var openBigImageTab = function (b, a) {
+  b.addEventListener('focus', function (evt) {
+    if (evt.target === b) {
+      bigPictureBlockGeneration(a);
     }
   });
-}
-document.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === 13) {
-    bigPicture.classList.remove('hidden');
-  }
-});
+  document.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === 13) {
+      bigPicture.classList.remove('hidden');
+    }
+  });
+};
 
+
+var picture = document.querySelectorAll('.picture');
+
+for (i = 0; i < picture.length; i++) {
+  openBigImageTab(picture[i], descriptionPhotos[i]);
+}
