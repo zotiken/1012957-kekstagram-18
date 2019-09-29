@@ -195,8 +195,6 @@ var applyFilter = function (params) {
   document.querySelector('.img-upload__preview').style.filter = countProportion(filter[params - 1], 100);
 };
 
-
-
 var indicateNoSpace = function (param) {
   var index = 0;
   for (var v = 0; v < param.length; v++) {
@@ -248,8 +246,6 @@ textHashtags.addEventListener('keydown', function (evt) {
     evt.stopPropagation();
   }
 });
-
-
 
 var textDescription = document.querySelector('.text__description');
 textDescription.addEventListener('keydown', function (evt) {
