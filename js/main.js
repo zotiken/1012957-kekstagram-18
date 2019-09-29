@@ -277,14 +277,15 @@ for (i = 0; i < picturesContainer.length; i++) {
       // if (param.target.parentNode === picturesContainer[i]) {
       //   // bigPictureBlockGeneration(descriptionPhotos[i]);
       // } else
-       if (param.target.classList[0] === 'picture__img') {
+      if (param.target.classList[0] === 'picture__img') {
         bigPicture.classList.remove('hidden');
       }
     }
-  }
+  };
   picturesContainer[i].removeEventListener('click', function (evt) {
-    mouseClickFun(evt)});
-};
+    mouseClickFun(evt);
+  });
+}
 
 var bigPictureBlockGeneration = function (params) {
   document.querySelector('.likes-count').textContent = params.likes;
@@ -305,7 +306,6 @@ var bigPictureBlockGeneration = function (params) {
   document.querySelector('.social__caption').textContent = params.description;
 };
 
-
 bigPictureImgCancel.addEventListener('click', function () {
   bigPicture.classList.add('hidden');
 });
@@ -320,18 +320,14 @@ for (i = 0; i < picture.length; i++) {
   picture[i].addEventListener('focus', function (evt) {
     for (i = 0; i < picture.length; i++) {
       if (evt.target === picture[i]) {
-        // console.log(evt.target);
-        // console.log(descriptionPhotos);
         bigPictureBlockGeneration(descriptionPhotos[i]);
       }
-        document.addEventListener('keydown', function (evt) {
-          if (evt.keyCode === 13) {
-            bigPicture.classList.remove('hidden');
-            // bigPictureBlockGeneration(descriptionPhotos[3]);
-          }
-        });
-
     }
   });
-};
+}
+document.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 13) {
+    bigPicture.classList.remove('hidden');
+  }
+});
 
