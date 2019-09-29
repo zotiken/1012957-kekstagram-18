@@ -315,19 +315,22 @@ document.addEventListener('keydown', function (evt) {
   }
 });
 
-var picture = document.querySelectorAll('.picture');
-for (i = 0; i < picture.length; i++) {
-  picture[i].addEventListener('focus', function (evt) {
-    for (i = 0; i < picture.length; i++) {
-      if (evt.target === picture[i]) {
-        bigPictureBlockGeneration(descriptionPhotos[i]);
-      }
+
+var openBigImageTab = function (b, a) {
+  b.addEventListener('focus', function (evt) {
+    if (evt.target === b) {
+      bigPictureBlockGeneration(a);
     }
   });
-}
-document.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === 13) {
-    bigPicture.classList.remove('hidden');
-  }
-});
+  document.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === 13) {
+      bigPicture.classList.remove('hidden');
+    }
+  });
+};
 
+var picture = document.querySelectorAll('.picture');
+
+for (i = 0; i < picture.length; i++) {
+  openBigImageTab(picture[i], descriptionPhotos[i]);
+}
