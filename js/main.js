@@ -240,11 +240,18 @@ var onValidInputHashtags = function () {
 textHashtags.addEventListener('change', onValidInputHashtags);
 
 textHashtags.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === '27') {
+  if (evt.keyCode === 27) {
     evt.stopPropagation();
   }
 });
 
+
+var textDescription = document.querySelector('.text__description');
+textDescription.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 27) {
+    evt.stopPropagation();
+  }
+});
 
 var imgUpLoadEffects = document.querySelector('.img-upload__effects');
 
