@@ -42,7 +42,7 @@
   // контрол загрузки изображения
 
   var uploadFile = document.querySelector('#upload-file');
-  var ddd = document.querySelector('.img-upload__preview-container');
+  var imgUploadPreview = document.querySelector('.img-upload__preview-container');
 
   // иконка закрытия редактор изображения
 
@@ -151,7 +151,7 @@
     var cursorPositionX = evt.clientX;
     var onMouseMove = function (moveEvt) {
       var shift = moveEvt.clientX - cursorPositionX;
-      effectLevelPin.style.left = cursorPositionX - ddd.offsetLeft - 35 - effectLevelLine.offsetLeft + shift - (effectLevelPin.offsetWidth / 2) + 'px';
+      effectLevelPin.style.left = cursorPositionX - imgUploadPreview.offsetLeft - 35 - effectLevelLine.offsetLeft + shift - (effectLevelPin.offsetWidth / 2) + 'px';
       effectLevelDepth.style.width = effectLevelPin.style.left;
 
       if (effectLevelPin.style.left <= '0px') {
