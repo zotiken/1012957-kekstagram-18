@@ -1,5 +1,6 @@
 'use strict';
 (function () {
+
   var filter = [
     {
       name: 'grayscale',
@@ -41,6 +42,7 @@
   // контрол загрузки изображения
 
   var uploadFile = document.querySelector('#upload-file');
+  var ddd = document.querySelector('.img-upload__preview-container');
 
   // иконка закрытия редактор изображения
 
@@ -124,35 +126,63 @@
     }
   });
 
-
   var imgUpLoadEffects = document.querySelector('.img-upload__effects');
 
   // пин слайдера редактора
-  var effectLevelPin = document.querySelector('.effect-level__pin');
-
 
   var effectLevelValue = document.querySelector('.effect-level__value').getAttribute('value');
 
+  var effectLevelPin = document.querySelector('.effect-level__pin');
+  window.effectLevelPin = effectLevelPin;
 
   var effectsItem = document.querySelectorAll('.effects__radio');
-
-
+  var effectLevelDepth = document.querySelector('.effect-level__depth');
+  var effectLevelLine = document.querySelector('.effect-level__line');
   // Функция пропорции значения range для фильтра
   var countProportion = function (obj, value) {
     return obj.name + '(' + (((obj.maxValue - obj.minValue) / 100) * value) + obj.measure + ')';
   };
 
-  effectLevelPin.addEventListener('mouseup', function () {
-    for (var i = 0; i < effectsItem.length; i++) {
+
+  // --------------------
+
+  effectLevelPin.addEventListener('mousedown', function (evt) {
+    evt.preventDefault();
+    var cursorPositionX = evt.clientX;
+    var onMouseMove = function (moveEvt) {
+      var shift = moveEvt.clientX - cursorPositionX;
+      effectLevelPin.style.left = cursorPositionX - ddd.offsetLeft - 35 - effectLevelLine.offsetLeft + shift - (effectLevelPin.offsetWidth / 2) + 'px';
+      effectLevelDepth.style.width = effectLevelPin.style.left;
+
+      if (effectLevelPin.style.left <= '0px') {
+        effectLevelPin.style.left = 0;
+        effectLevelDepth.style.width = effectLevelPin.style.left;
+
+      } else if (effectLevelPin.style.left >= '450px') {
+        effectLevelPin.style.left = '450px';
+        effectLevelDepth.style.width = effectLevelPin.style.left;
+      }
+
+    };
+    var onMouseUp = function () {
+      document.removeEventListener('mousemove', onMouseMove);
+      effectLevelValue = 100;
+      var levelWidth = window.getComputedStyle(document.querySelector('.img-upload__effect-level')).width;
+      effectLevelValue = Math.round(parseInt(String(effectLevelPin.style.left), 10) / (parseInt(levelWidth, 10) / 100));
+
       if (effectsItem[0].checked) {
         document.querySelector('.img-upload__preview').style.filter = '';
-
       }
-      if (effectsItem[i].checked) {
-        document.querySelector('.img-upload__preview').style.filter = countProportion(filter[i - 1], effectLevelValue);
 
+      for (var i = 1; i < effectsItem.length; i++) {
+        if (effectsItem[i].checked) {
+          document.querySelector('.img-upload__preview').style.filter = countProportion(filter[i - 1], effectLevelValue);
+        }
       }
-    }
+    };
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
   });
 
   var applyFilter = function (params) {
