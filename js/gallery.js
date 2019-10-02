@@ -6,7 +6,7 @@
   querySelector('.picture');
 
 
-  var pictureBlokGeneration = function (params) {
+  var pictureBlockGeneration = function (params) {
 
     var pictureElement = templatePicture.cloneNode(true);
 
@@ -19,7 +19,7 @@
 
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < window.data.descriptionPhotos.length; i++) {
-    fragment.appendChild(pictureBlokGeneration(window.data.descriptionPhotos[i]));
+    fragment.appendChild(pictureBlockGeneration(window.data.descriptionPhotos[i]));
   }
   document.querySelector('.pictures').appendChild(fragment);
 

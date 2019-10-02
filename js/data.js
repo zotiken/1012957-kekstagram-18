@@ -1,9 +1,6 @@
 'use strict';
 (function () {
 
-  // document.querySelector('.big-picture').classList.remove('hidden');
-
-
   var bigPictureImg = document.querySelector('.big-picture__img');
   window.bigPictureImg = bigPictureImg;
 

@@ -161,19 +161,26 @@
   };
 
   imgUpLoadEffects.addEventListener('input', function (evt) {
-    if (evt.target.id === 'effect-none') {
-      document.querySelector('.img-upload__effect-level').classList.add('hidden');
-      document.querySelector('.img-upload__preview').style.filter = '';
-    } else if (evt.target.id === 'effect-chrome') {
-      applyFilter(1);
-    } else if (evt.target.id === 'effect-sepia') {
-      applyFilter(2);
-    } else if (evt.target.id === 'effect-marvin') {
-      applyFilter(3);
-    } else if (evt.target.id === 'effect-phobos') {
-      applyFilter(4);
-    } else if (evt.target.id === 'effect-heat') {
-      applyFilter(5);
+    switch (evt.target.id) {
+      case 'effect-none':
+        document.querySelector('.img-upload__effect-level').classList.add('hidden');
+        document.querySelector('.img-upload__preview').style.filter = '';
+        break;
+      case 'effect-chrome':
+        applyFilter(1);
+        break;
+      case 'effect-sepia':
+        applyFilter(2);
+        break;
+      case 'effect-marvin':
+        applyFilter(3);
+        break;
+      case 'effect-phobos':
+        applyFilter(4);
+        break;
+      case 'effect-heat':
+        applyFilter(5);
+        break;
     }
   });
 

@@ -31,9 +31,6 @@
 
     var mouseClickFun = function (param) {
       for (i = 0; i < picturesContainer.length; i++) {
-        // if (param.target.parentNode === picturesContainer[i]) {
-        //   // bigPictureBlockGeneration(descriptionPhotos[i]);
-        // } else
         if (param.target.classList[0] === 'picture__img') {
           bigPicture.classList.remove('hidden');
         }
