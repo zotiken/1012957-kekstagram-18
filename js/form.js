@@ -42,7 +42,6 @@
   // контрол загрузки изображения
 
   var uploadFile = document.querySelector('#upload-file');
-  var imgUploadPreview = document.querySelector('.img-upload__preview-container');
 
   // иконка закрытия редактор изображения
 
@@ -143,32 +142,36 @@
     return obj.name + '(' + (((obj.maxValue - obj.minValue) / 100) * value) + obj.measure + ')';
   };
 
-
   // --------------------
 
   effectLevelPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
+    var effectLevelLineCoord = effectLevelLine.getBoundingClientRect().x;
+    var effectLevelLineWidth = effectLevelLine.getBoundingClientRect().width;
+    var effectLevelPinLineX = effectLevelPin.getBoundingClientRect().x;
+
     var cursorPositionX = evt.clientX;
     var onMouseMove = function (moveEvt) {
-      var shift = moveEvt.clientX - cursorPositionX;
-      effectLevelPin.style.left = cursorPositionX - imgUploadPreview.offsetLeft - 35 - effectLevelLine.offsetLeft + shift - (effectLevelPin.offsetWidth / 2) + 'px';
+
+      var shift = cursorPositionX - evt.clientX;
+      cursorPositionX = moveEvt.clientX;
+      effectLevelPin.style.left = Math.round(((effectLevelPinLineX - effectLevelLineCoord + shift + effectLevelPin.offsetWidth / 2) / effectLevelLineWidth) * 100) + '%';
+
       effectLevelDepth.style.width = effectLevelPin.style.left;
 
       if (effectLevelPin.style.left <= '0px') {
         effectLevelPin.style.left = 0;
         effectLevelDepth.style.width = effectLevelPin.style.left;
 
-      } else if (effectLevelPin.style.left >= '450px') {
-        effectLevelPin.style.left = '450px';
+      } else if (parseInt(effectLevelPin.style.left, 10) > 99) {
+        effectLevelPin.style.left = '100%';
         effectLevelDepth.style.width = effectLevelPin.style.left;
       }
-
     };
     var onMouseUp = function () {
       document.removeEventListener('mousemove', onMouseMove);
       effectLevelValue = 100;
-      var levelWidth = window.getComputedStyle(document.querySelector('.img-upload__effect-level')).width;
-      effectLevelValue = Math.round(parseInt(String(effectLevelPin.style.left), 10) / (parseInt(levelWidth, 10) / 100));
+      effectLevelValue = parseInt(effectLevelPin.style.left, 10);
 
       if (effectsItem[0].checked) {
         document.querySelector('.img-upload__preview').style.filter = '';
@@ -191,6 +194,8 @@
   };
 
   imgUpLoadEffects.addEventListener('input', function (evt) {
+    effectLevelPin.style.left = '100%';
+    effectLevelDepth.style.width = effectLevelPin.style.left;
     switch (evt.target.id) {
       case 'effect-none':
         document.querySelector('.img-upload__effect-level').classList.add('hidden');
