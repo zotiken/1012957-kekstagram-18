@@ -38,8 +38,7 @@
   // --------- рандомное число с min и  max -----------
 
 
-  var randomIn
-  ger = function (min, max) {
+  var randomInteger = function (min, max) {
     // получить случайное число от min до max
     var rand = min + Math.random() * (max - min);
     return Math.round(rand);
@@ -73,7 +72,7 @@
       });
     }
   };
-  // generateDescriptionPhoto(25);
+  generateDescriptionPhoto(0);
 
 
   function bigPictureBlockGeneration(params) {

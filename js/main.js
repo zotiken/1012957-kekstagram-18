@@ -4,17 +4,17 @@
   document.querySelector('.comments-loader').classList.add('visually-hidden');
 
   var errorBlockGeneration = function (params) {
-var errorCloneNode = document.querySelector('#error').content.querySelector('.error');
+    var errorCloneNode = document.querySelector('#error').content.querySelector('.error');
     var errorElement = errorCloneNode.cloneNode(true);
 
     errorElement.querySelector('.error__title').textContent = params;
 
     var fragment = document.createDocumentFragment();
     fragment.appendChild(errorElement);
-  document.body.appendChild(fragment);
+    document.body.appendChild(fragment);
   };
   window.main = {
-    errorBlockGeneration:errorBlockGeneration
+    errorBlockGeneration: errorBlockGeneration
   };
 
 })();
