@@ -3,9 +3,7 @@
 
   var bigPictureImg = document.querySelector('.big-picture__img');
   window.bigPictureImg = bigPictureImg;
-
   var descriptionPhotos = [];
-  window.descriptionPhotos = descriptionPhotos;
   var descriptions = [
     'шедевр',
     'модерн',
@@ -40,7 +38,8 @@
   // --------- рандомное число с min и  max -----------
 
 
-  var randomInteger = function (min, max) {
+  var randomIn
+  ger = function (min, max) {
     // получить случайное число от min до max
     var rand = min + Math.random() * (max - min);
     return Math.round(rand);
@@ -74,7 +73,7 @@
       });
     }
   };
-  generateDescriptionPhoto(25);
+  // generateDescriptionPhoto(25);
 
 
   function bigPictureBlockGeneration(params) {
