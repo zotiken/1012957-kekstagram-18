@@ -1,5 +1,6 @@
 'use strict';
 (function () {
+
   var filter = [
     {
       name: 'grayscale',
@@ -124,35 +125,67 @@
     }
   });
 
-
   var imgUpLoadEffects = document.querySelector('.img-upload__effects');
 
   // пин слайдера редактора
-  var effectLevelPin = document.querySelector('.effect-level__pin');
-
 
   var effectLevelValue = document.querySelector('.effect-level__value').getAttribute('value');
 
+  var effectLevelPin = document.querySelector('.effect-level__pin');
+  window.effectLevelPin = effectLevelPin;
 
   var effectsItem = document.querySelectorAll('.effects__radio');
-
-
+  var effectLevelDepth = document.querySelector('.effect-level__depth');
+  var effectLevelLine = document.querySelector('.effect-level__line');
   // Функция пропорции значения range для фильтра
   var countProportion = function (obj, value) {
     return obj.name + '(' + (((obj.maxValue - obj.minValue) / 100) * value) + obj.measure + ')';
   };
 
-  effectLevelPin.addEventListener('mouseup', function () {
-    for (var i = 0; i < effectsItem.length; i++) {
+  // --------------------
+
+  effectLevelPin.addEventListener('mousedown', function (evt) {
+    evt.preventDefault();
+    var effectLevelLineCoord = effectLevelLine.getBoundingClientRect().x;
+    var effectLevelLineWidth = effectLevelLine.getBoundingClientRect().width;
+    var effectLevelPinLineX = effectLevelPin.getBoundingClientRect().x;
+
+    var cursorPositionX = evt.clientX;
+    var onMouseMove = function (moveEvt) {
+
+      var shift = cursorPositionX - evt.clientX;
+      cursorPositionX = moveEvt.clientX;
+      effectLevelPin.style.left = Math.round(((effectLevelPinLineX - effectLevelLineCoord + shift + effectLevelPin.offsetWidth / 2) / effectLevelLineWidth) * 100) + '%';
+
+      effectLevelDepth.style.width = effectLevelPin.style.left;
+
+      if (effectLevelPin.style.left <= '0px') {
+        effectLevelPin.style.left = 0;
+        effectLevelDepth.style.width = effectLevelPin.style.left;
+
+      } else if (parseInt(effectLevelPin.style.left, 10) > 99) {
+        effectLevelPin.style.left = '100%';
+        effectLevelDepth.style.width = effectLevelPin.style.left;
+      }
+    };
+    var onMouseUp = function () {
+      document.removeEventListener('mousemove', onMouseMove);
+      effectLevelValue = 100;
+      effectLevelValue = parseInt(effectLevelPin.style.left, 10);
+
       if (effectsItem[0].checked) {
         document.querySelector('.img-upload__preview').style.filter = '';
-
       }
-      if (effectsItem[i].checked) {
-        document.querySelector('.img-upload__preview').style.filter = countProportion(filter[i - 1], effectLevelValue);
 
+      for (var i = 1; i < effectsItem.length; i++) {
+        if (effectsItem[i].checked) {
+          document.querySelector('.img-upload__preview').style.filter = countProportion(filter[i - 1], effectLevelValue);
+        }
       }
-    }
+    };
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
   });
 
   var applyFilter = function (params) {
@@ -161,6 +194,8 @@
   };
 
   imgUpLoadEffects.addEventListener('input', function (evt) {
+    effectLevelPin.style.left = '100%';
+    effectLevelDepth.style.width = effectLevelPin.style.left;
     switch (evt.target.id) {
       case 'effect-none':
         document.querySelector('.img-upload__effect-level').classList.add('hidden');
@@ -183,5 +218,37 @@
         break;
     }
   });
+
+  var onSuccessfullySending = function () {
+    imgUploadOverlay.classList.add('hidden');
+    document.querySelector('.img-upload__form').reset();
+    document.querySelector('.effect-level__pin').style.left = '20%';
+    effectLevelDepth.style.width = '20%';
+    window.main.succesPopUpBlockGeneration();
+  };
+  var onErrorSending = function () {
+    imgUploadForm.classList.add('hidden');
+    window.main.errorBlockGeneration();
+    var onCloseErrorPopUp = function (elem) {
+      elem.remove();
+      imgUploadForm.classList.remove('hidden');
+    };
+    document.addEventListener('click', function (evt) {
+      if (evt.target.classList[0] === 'error__button') {
+        onCloseErrorPopUp(evt.path[3]);
+      }
+      if (evt.target.classList[0] === 'error') {
+        onCloseErrorPopUp(evt.target);
+      }
+    });
+  };
+
+
+  var imgUploadForm = document.querySelector('.img-upload__form');
+  imgUploadForm.addEventListener('submit', function (evt) {
+    window.backend.upLoad('https://js.dump.academy/kekstagrams', onSuccessfullySending, onErrorSending, imgUploadForm);
+    evt.preventDefault();
+  });
+
 
 })();

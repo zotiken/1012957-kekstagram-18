@@ -4,42 +4,26 @@
 
   var bigPictureImgCancel = document.querySelector('.big-picture__cancel');
 
-  var openBigImageTab = function (b, a) {
-    b.addEventListener('focus', function (evt) {
-      if (evt.target === b) {
-        window.data.bigPictureBlockGeneration(a);
-      }
-    });
-    document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === 13) {
-        bigPicture.classList.remove('hidden');
-      }
-    });
+  var openBigImageTab = function (elem) {
+    bigPicture.classList.remove('hidden');
+    document.querySelector('.likes-count').textContent = elem.querySelector('.picture__likes').textContent;
+    bigPicture.querySelector('img').src = elem.querySelector('.picture__img').src;
+    document.querySelector('.comments-count').textContent = elem.querySelector('.picture__comments').textContent;
   };
 
-  var picture = document.querySelectorAll('.picture');
-  for (i = 0; i < picture.length; i++) {
-    openBigImageTab(picture[i], window.data.descriptionPhotos[i]);
-  }
 
-  var picturesContainer = document.querySelectorAll('.pictures');
-  for (var i = 0; i < picturesContainer.length; i++) {
-    picturesContainer[i].addEventListener('click', function (evt) {
-      mouseClickFun(evt);
-    });
-
-
-    var mouseClickFun = function (param) {
-      for (i = 0; i < picturesContainer.length; i++) {
-        if (param.target.classList[0] === 'picture__img') {
-          bigPicture.classList.remove('hidden');
-        }
+  var onopenBigImage = function (evt) {
+    if (evt.target.classList[0] === 'picture' || evt.target.classList[0] === 'picture__img') {
+      if (evt.target.classList[0] === 'picture__img') {
+        openBigImageTab(evt.path[1]);
+      } else {
+        openBigImageTab(evt.target);
       }
-    };
-    picturesContainer[i].removeEventListener('click', function (evt) {
-      mouseClickFun(evt);
-    });
-  }
+    }
+  };
+
+  document.querySelector('.pictures').addEventListener('click', onopenBigImage);
+
 
   bigPictureImgCancel.addEventListener('click', function () {
     bigPicture.classList.add('hidden');
