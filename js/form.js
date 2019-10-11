@@ -219,4 +219,36 @@
     }
   });
 
+  var onSuccessfullySending = function () {
+    imgUploadOverlay.classList.add('hidden');
+    document.querySelector('.img-upload__form').reset();
+    document.querySelector('.effect-level__pin').style.left = '20%';
+    effectLevelDepth.style.width = '20%';
+    window.main.succesPopUpBlockGeneration();
+  };
+  var onErrorSending = function () {
+    imgUploadForm.classList.add('hidden');
+    window.main.errorBlockGeneration();
+    var onCloseErrorPopUp = function (elem) {
+      elem.remove();
+      imgUploadForm.classList.remove('hidden');
+    };
+    document.addEventListener('click', function (evt) {
+      if (evt.target.classList[0] === 'error__button') {
+        onCloseErrorPopUp(evt.path[3]);
+      }
+      if (evt.target.classList[0] === 'error') {
+        onCloseErrorPopUp(evt.target);
+      }
+    });
+  };
+
+
+  var imgUploadForm = document.querySelector('.img-upload__form');
+  imgUploadForm.addEventListener('submit', function (evt) {
+    window.backend.upLoad('https://js.dump.academy/kekstagrams', onSuccessfullySending, onErrorSending, imgUploadForm);
+    evt.preventDefault();
+  });
+
+
 })();

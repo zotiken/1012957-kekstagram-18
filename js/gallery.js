@@ -17,7 +17,6 @@
     return pictureElement;
   };
 
-
   var onGetDescriptionPhotos = function (data) {
 
     var fragment = document.createDocumentFragment();
@@ -28,5 +27,4 @@
   };
 
   window.backend.load('https://js.dump.academy/kekstagram/data', onGetDescriptionPhotos, window.main.errorBlockGeneration);
-
 })();
