@@ -5,6 +5,7 @@
   window.bigPictureImg = bigPictureImg;
   var descriptionPhotos = [];
 
+
   window.data = {
     descriptionPhotos: descriptionPhotos,
   };

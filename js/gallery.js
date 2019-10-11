@@ -17,7 +17,6 @@
     return pictureElement;
   };
 
-
   var onGetDescriptionPhotos = function (data) {
 
     var fragment = document.createDocumentFragment();
