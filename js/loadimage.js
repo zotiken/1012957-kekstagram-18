@@ -15,7 +15,7 @@
       reader.addEventListener('load', function () {
         previewImage.src = reader.result;
       });
-      reader.readAsDataURL(file);
+      reader.readAsDataURLs(file);
     }
   });
 })();
