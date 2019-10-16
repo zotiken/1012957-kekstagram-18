@@ -246,7 +246,7 @@
 
   var imgUploadForm = document.querySelector('.img-upload__form');
   imgUploadForm.addEventListener('submit', function (evt) {
-    window.backend.upLoad('https://js.dump.academy/kekstagrams', onSuccessfullySending, onErrorSending, imgUploadForm);
+    window.backend.upLoad('https://js.dump.academy/kekstagram', onSuccessfullySending, onErrorSending, imgUploadForm);
     evt.preventDefault();
   });
 
