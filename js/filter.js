@@ -56,7 +56,7 @@
   };
 
   var filtersForm = document.querySelector('.img-filters__form');
-  filtersForm.addEventListener('click',window.debounce(function (evt) {
+  filtersForm.addEventListener('click', window.debounce(function (evt) {
     onFilterSelect(evt);
   }));
 })();
