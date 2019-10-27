@@ -1,21 +1,21 @@
 'use strict';
 (function () {
-  var IMG_TYPE = ['jpg', 'gif', 'png', 'webp'];
+  var IMG_TYPES = ['jpg', 'gif', 'png', 'webp'];
   var imageUpload = document.querySelector('.img-upload__input');
-  var previewImage = document.querySelector('.img-upload__preview').querySelector('img');
+  window.previewImage = document.querySelector('.img-upload__preview').querySelector('img');
   imageUpload.addEventListener('change', function () {
+    window.effectLevel.classList.add('hidden');
     var file = imageUpload.files[0];
     var filename = file.name.toLowerCase();
-
-    var matches = IMG_TYPE.some(function (it) {
+    var matches = IMG_TYPES.some(function (it) {
       return filename.endsWith(it);
     });
     if (matches) {
       var reader = new FileReader();
       reader.addEventListener('load', function () {
-        previewImage.src = reader.result;
+        window.previewImage.src = reader.result;
       });
-      reader.readAsDataURLs(file);
+      reader.readAsDataURL(file);
     }
   });
 })();

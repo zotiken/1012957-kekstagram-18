@@ -3,26 +3,21 @@
   document.querySelector('.social__comment-count').classList.add('visually-hidden');
   document.querySelector('.comments-loader').classList.add('visually-hidden');
 
-  var errorBlockGeneration = function (params) {
+  var generateErrorBlock = function (params) {
     var errorCloneNode = document.querySelector('#error').content.querySelector('.error');
-    var errorElement = errorCloneNode.cloneNode(true);
+    var errorNode = errorCloneNode.cloneNode(true);
 
-    errorElement.querySelector('.error__title').textContent = params;
-
-    var fragment = document.createDocumentFragment();
-    fragment.appendChild(errorElement);
-    document.body.appendChild(fragment);
+    errorNode.querySelector('.error__title').textContent = params;
+    document.body.appendChild(errorNode);
   };
 
-  var succesPopUp = document.querySelector('#success').content.querySelector('.success');
-  var succesPopUpBlockGeneration = function () {
-    var succesPopUpBlock = succesPopUp.cloneNode(true);
-    var fragment = document.createDocumentFragment();
-    fragment.appendChild(succesPopUpBlock);
-    document.body.appendChild(fragment);
+  var successPopUp = document.querySelector('#success').content.querySelector('.success');
+  var generateSuccessPopUpBlock = function () {
+    var successPopUpBlock = successPopUp.cloneNode(true);
+    document.body.appendChild(successPopUpBlock);
     document.addEventListener('keydown', function (evt) {
       if (evt.keyCode === 27) {
-        succesPopUpBlock.remove();
+        successPopUpBlock.remove();
       }
     });
 
@@ -41,8 +36,8 @@
   });
 
   window.main = {
-    errorBlockGeneration: errorBlockGeneration,
-    succesPopUpBlockGeneration: succesPopUpBlockGeneration
+    generateErrorBlock: generateErrorBlock,
+    generateSuccessPopUpBlock: generateSuccessPopUpBlock
   };
 
 })();

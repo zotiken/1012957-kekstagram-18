@@ -1,5 +1,4 @@
 'use strict';
-/* eslint-disable no-console */
 (function () {
   var load = function (url, onLoad, onError) {
     var xhr = new XMLHttpRequest();
