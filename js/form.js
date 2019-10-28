@@ -140,22 +140,23 @@
   var scaleValue = document.querySelector('.scale__control--value');
   var imgUploadPreview = document.querySelector('.img-upload__preview').querySelector('img');
   var changeScale = function (params) {
-    if (parseInt(scaleValue.value, 10) >= 25 && parseInt(scaleValue.value, 10) <= 85) {
+    if (parseInt(scaleValue.value, 10) >= 25 && parseInt(scaleValue.value, 10) <= 75) {
       scaleValue.value = (parseInt(scaleValue.value, 10) + +(params + '25')) + '%';
       imgUploadPreview.style.transform = 'scale(' + (parseInt(scaleValue.value, 10) / 100) + ')';
     } else if (parseInt(scaleValue.value, 10) >= 0 && parseInt(scaleValue.value, 10) < 25 && params === '+') {
       scaleValue.value = (parseInt(scaleValue.value, 10) + 25) + '%';
       imgUploadPreview.style.transform = 'scale(' + (parseInt(scaleValue.value, 10) / 100) + ')';
-    } else if (parseInt(scaleValue.value, 10) >= 85 && parseInt(scaleValue.value, 10) <= 100 && params === '-') {
+    } else if (parseInt(scaleValue.value, 10) >= 75 && parseInt(scaleValue.value, 10) <= 100 && params === '-') {
       scaleValue.value = (parseInt(scaleValue.value, 10) - 25) + '%';
       imgUploadPreview.style.transform = 'scale(' + (parseInt(scaleValue.value, 10) / 100) + ')';
-    } else if (parseInt(scaleValue.value, 10) >= 100) {
+    } else if (parseInt(scaleValue.value, 10) > 75) {
       scaleValue.value = 100 + '%';
       imgUploadPreview.style.transform = 'scale(' + (parseInt(scaleValue.value, 10) / 100) + ')';
-    } else {
-      scaleValue.value = 0 + '%';
-      imgUploadPreview.style.transform = 'scale(' + (parseInt(scaleValue.value, 10) / 100) + ')';
     }
+    // else {
+    //   scaleValue.value = 0 + '%';
+    //   imgUploadPreview.style.transform = 'scale(' + (parseInt(scaleValue.value, 10) / 100) + ')';
+    // }
   };
   scaleSmaller.addEventListener('click', function () {
     changeScale('-');
