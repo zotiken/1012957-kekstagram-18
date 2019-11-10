@@ -1,17 +1,16 @@
 'use strict';
 (function () {
   var ESC_KEY_CODE = 27;
-  var MASSIVE_THREE_ELENENT = 2;
-
+  var ELEMENT_THREE_ARRAY = 2;
   var errorBlock = document.querySelector('#error').content.querySelector('.error');
 
   document.querySelector('.social__comment-count').classList.add('visually-hidden');
   document.querySelector('.comments-loader').classList.add('visually-hidden');
 
   var generateErrorBlock = function (parameter) {
-    var errorNode = errorBlock.cloneNode(true);
-    errorNode.querySelector('.error__title').textContent = parameter;
-    document.body.appendChild(errorNode);
+    window.errorNode = errorBlock.cloneNode(true);
+    window.errorNode.querySelector('.error__title').textContent = parameter;
+    document.body.appendChild(window.errorNode);
   };
   var successPopUp = document.querySelector('#success').content.querySelector('.success');
   var generateSuccessPopUpBlock = function () {
@@ -20,10 +19,10 @@
     var onRemoveSuccessPopUpBlock = function (i) {
       if (i.keyCode === ESC_KEY_CODE) {
         successPopUpBlock.remove();
+        document.removeEventListener('keydown', function (evt) {
+          onRemoveSuccessPopUpBlock(evt);
+        });
       }
-      document.removeEventListener('keydown', function (evt) {
-        onRemoveSuccessPopUpBlock(evt);
-      });
     };
 
     document.addEventListener('keydown', function (evt) {
@@ -36,19 +35,18 @@
     element.remove();
   };
   document.addEventListener('click', function (evt) {
-    if (evt.target.classList[window.form.MASSIVE_FIRST_ELENENT] === 'success__button') {
-      onCloseSuccessPopUp(evt.path[MASSIVE_THREE_ELENENT]);
+    if (evt.target.classList[window.form.ELEMENT_ONE_ARRAY] === 'success__button') {
+      onCloseSuccessPopUp(evt.path[ELEMENT_THREE_ARRAY]);
     }
-    if (evt.target.classList[window.form.MASSIVE_FIRST_ELENENT] === 'success') {
-      onCloseSuccessPopUp(evt.target.classList[window.form.MASSIVE_FIRST_ELENENT]);
+    if (evt.target.classList[window.form.ELEMENT_ONE_ARRAY] === 'success') {
+      onCloseSuccessPopUp(evt.target.classList[window.form.ELEMENT_ONE_ARRAY]);
     }
   });
   window.main = {
     ESC_KEY_CODE: ESC_KEY_CODE,
-    MASSIVE_THREE_ELENENT: MASSIVE_THREE_ELENENT,
+    ELEMENT_THREE_ARRAY: ELEMENT_THREE_ARRAY,
     generateErrorBlock: generateErrorBlock,
     generateSuccessPopUpBlock: generateSuccessPopUpBlock,
-    errorBlock: errorBlock
   };
 
 })();

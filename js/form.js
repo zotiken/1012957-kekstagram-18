@@ -1,8 +1,8 @@
 'use strict';
 (function () {
 
-  var MASSIVE_FIRST_ELENENT = 0;
-  var MASSIVE_CORRECT = 1;
+  var ELEMENT_ONE_ARRAY = 0;
+  var ARRAY_CORRECT = 1;
 
   var SURFACING_STEP_THREE = 3;
 
@@ -68,7 +68,6 @@
   };
   var onDefaultFileValues = function () {
     uploadFile.value = null;
-    // uploadFile.removeEventListener('click', onDefaultFileValues);
   };
 
   var onImgUploadOverlayClose = function () {
@@ -79,8 +78,8 @@
   var onImgUploadCancel = function (i) {
     if (i.keyCode === window.main.ESC_KEY_CODE) {
       onImgUploadOverlayClose();
+      document.removeEventListener('keydown', onImgUploadCancel);
     }
-    document.removeEventListener('keydown', onImgUploadCancel);
   };
 
   var onOpenPopUpForm = function () {
@@ -102,7 +101,7 @@
     hashTags = textHashTags.value.split(' ');
 
     hashTags.forEach(function (item, i, arr) {
-      if (item[MASSIVE_FIRST_ELENENT] !== '#') {
+      if (item[ELEMENT_ONE_ARRAY] !== '#') {
         textHashTags.setCustomValidity('Хэш-тег начинается с символа # (решётка)');
       } else if (indicateNoSpace(item) > 1) {
         textHashTags.setCustomValidity('Хэш-теги разделяются пробелами');
@@ -123,11 +122,10 @@
   };
 
   textHashTags.addEventListener('input', onValidInputHashTags);
-  textHashTags.addEventListener('keydown', onOffEsc);
 
   var lookForDuplicates = function (parameter) {
     var index = 0;
-    for (var i = MASSIVE_FIRST_ELENENT; i < parameter.length; i++) {
+    for (var i = ELEMENT_ONE_ARRAY; i < parameter.length; i++) {
       for (var y = i + 1; y < parameter.length; y++) {
         if (parameter[i].toLowerCase() === parameter[y].toLowerCase()) {
           index++;
@@ -139,7 +137,7 @@
 
   var indicateNoSpace = function (parameter) {
     var index = 0;
-    for (var v = MASSIVE_FIRST_ELENENT; v < parameter.length; v++) {
+    for (var v = ELEMENT_ONE_ARRAY; v < parameter.length; v++) {
       if (parameter[v] === '#') {
         index++;
       }
@@ -151,8 +149,8 @@
   var onOffEsc = function (i) {
     if (i.keyCode === window.main.ESC_KEY_CODE) {
       i.stopPropagation();
+      document.removeEventListener('keydown', onOffEsc);
     }
-    document.removeEventListener('keydown', onOffEsc);
   };
 
   textDescription.addEventListener('keydown', onOffEsc);
@@ -235,13 +233,13 @@
 
       effectLevelValue = parseInt(effectLevelPin.style.left, 10);
 
-      if (effectsItem[MASSIVE_FIRST_ELENENT].checked) {
+      if (effectsItem[ELEMENT_ONE_ARRAY].checked) {
         window.previewImage.style.filter = '';
       }
 
       for (var i = 1; i < effectsItem.length; i++) {
         if (effectsItem[i].checked) {
-          window.previewImage.style.filter = countProportion(filters[i - MASSIVE_CORRECT], effectLevelValue);
+          window.previewImage.style.filter = countProportion(filters[i - ARRAY_CORRECT], effectLevelValue);
         }
       }
 
@@ -257,7 +255,7 @@
 
   var applyFilter = function (parameter) {
     effectLevel.classList.remove('hidden');
-    window.previewImage.style.filter = countProportion(filters[parameter - MASSIVE_CORRECT], 100);
+    window.previewImage.style.filter = countProportion(filters[parameter - ARRAY_CORRECT], 100);
   };
 
   imgUpLoadEffects.addEventListener('input', function (evt) {
@@ -302,13 +300,14 @@
     imgUploadForm.classList.add('hidden');
     window.main.generateErrorBlock();
     document.addEventListener('click', function (evt) {
-      if (evt.target.classList[MASSIVE_FIRST_ELENENT] === 'error__button') {
+      if (evt.target.classList[ELEMENT_ONE_ARRAY] === 'error__button') {
         onCloseErrorPopUp(evt.path[SURFACING_STEP_THREE]);
       }
-      if (evt.target.classList[MASSIVE_FIRST_ELENENT] === 'error') {
+      if (evt.target.classList[ELEMENT_ONE_ARRAY] === 'error') {
         onCloseErrorPopUp(evt.target);
       }
     });
+    document.addEventListener('keydown', window.gallery.onCloseErrorEsc);
   };
 
   imgUploadForm.addEventListener('submit', function (evt) {
@@ -320,6 +319,6 @@
   window.onCloseErrorPopUp = onCloseErrorPopUp;
 
   window.form = {
-    MASSIVE_FIRST_ELENENT: MASSIVE_FIRST_ELENENT,
+    ELEMENT_ONE_ARRAY: ELEMENT_ONE_ARRAY,
   };
 })();

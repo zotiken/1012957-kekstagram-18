@@ -57,22 +57,20 @@
     updateGallery(window.pictures);
     imgFilters.classList.remove('img-filters--inactive');
   };
-
   var onCloseErrorEsc = function (i) {
     if (i.keyCode === window.main.ESC_KEY_CODE) {
-      window.main.errorBlock.remove();
+      window.onCloseErrorPopUp(window.errorNode);
+      document.removeEventListener('keydown', onCloseErrorEsc);
     }
-    document.removeEventListener('keydown', onCloseErrorEsc);
   };
-
 
   var onErrorClose = function () {
     window.main.generateErrorBlock();
     document.addEventListener('click', function (evt) {
-      if (evt.target.classList[window.form.MASSIVE_FIRST_ELENENT] === 'error__button') {
+      if (evt.target.classList[window.form.ELEMENT_ONE_ARRAY] === 'error__button') {
         window.onCloseErrorPopUp(evt.path[3]);
       }
-      if (evt.target.classList[window.form.MASSIVE_FIRST_ELENENT] === 'error') {
+      if (evt.target.classList[window.form.ELEMENT_ONE_ARRAY] === 'error') {
         window.onCloseErrorPopUp(evt.target);
       }
     });
@@ -82,6 +80,7 @@
   window.gallery = {
     sortPictureLikes: sortPictureLikes,
     sortPictureCommit: sortPictureCommit,
+    onCloseErrorEsc: onCloseErrorEsc,
     updateGallery: updateGallery,
     picturesBlock: picturesBlock
   };

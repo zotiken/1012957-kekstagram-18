@@ -11,10 +11,10 @@
 
   var getPicturesRandom = function (num) {
     var picturesRandom = [];
-    for (var i = window.form.MASSIVE_FIRST_ELENENT; i < num; i++) {
+    for (var i = window.form.ELEMENT_ONE_ARRAY; i < num; i++) {
       picturesRandom.push(makeRandomValue(window.pictures));
     }
-    for (var q = window.form.MASSIVE_FIRST_ELENENT; q < picturesRandom.length; q++) {
+    for (var q = window.form.ELEMENT_ONE_ARRAY; q < picturesRandom.length; q++) {
       for (var r = q + 1; r < picturesRandom.length; r++) {
         if (picturesRandom[q] === picturesRandom[r]) {
           picturesRandom[r] = makeRandomValue(window.pictures);
