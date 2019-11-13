@@ -325,8 +325,8 @@
   };
 
   imgUploadForm.addEventListener('submit', function (evt) {
-    window.backend.upLoad('https://js.dump.academy/kekstagram', onSuccessfullySending, onErrorSending, imgUploadForm);
     evt.preventDefault();
+    window.backend.upLoad('https://js.dump.academy/kekstagram', onSuccessfullySending, onErrorSending, imgUploadForm);
   });
 
   window.effectLevel = effectLevel;
