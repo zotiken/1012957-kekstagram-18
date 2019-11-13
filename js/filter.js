@@ -2,7 +2,7 @@
 
 (function () {
 
-  var NUMBER_PICTURES_RANDOM = 10;
+  var COUNT_RANDOM_PICTURES = 10;
 
   var filtersForm = document.querySelector('.img-filters__form');
   var makeRandomValue = function (array) {
@@ -35,21 +35,21 @@
   var onFilterSelect = function (parameter) {
     switch (parameter.target.id) {
       case 'filter-popular':
-        window.gallery.sortPictureLikes(window.pictures);
+        window.gallery.sortByLikes(window.pictures);
         window.gallery.updateGallery(window.pictures);
         clearActiveButtons(parameter);
         break;
       case 'filter-random':
-        window.gallery.updateGallery(getPicturesRandom(NUMBER_PICTURES_RANDOM));
+        window.gallery.updateGallery(getPicturesRandom(COUNT_RANDOM_PICTURES));
         clearActiveButtons(parameter);
         break;
       case 'filter-discussed':
-        window.gallery.sortPictureCommit(window.pictures);
+        window.gallery.sortByComments(window.pictures);
         window.gallery.updateGallery(window.pictures);
         clearActiveButtons(parameter);
         break;
       default:
-        window.gallery.sortPictureLikes(window.pictures);
+        window.gallery.sortByLikes(window.pictures);
         window.gallery.updateGallery(window.pictures);
         clearActiveButtons(parameter);
         break;

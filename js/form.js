@@ -1,6 +1,7 @@
 'use strict';
 (function () {
 
+  var ENTER_KEY_CODE = 13;
   var ELEMENT_ONE_ARRAY = 0;
   var ARRAY_CORRECT = 1;
 
@@ -14,6 +15,7 @@
   var BLUR = 4;
   var BRIGHTNESS = 5;
 
+  var effectsPreview = document.querySelectorAll('.effects__item');
   var imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
   var imgUploadForm = document.querySelector('.img-upload__form');
 
@@ -120,6 +122,14 @@
       }
     });
   };
+
+
+  var cancelDefaultEnter = function (param) {
+    if (param.keyCode === ENTER_KEY_CODE ) {
+      param.preventDefault();
+    }
+  }
+  textHashTags.addEventListener('keydown', cancelDefaultEnter);
 
   textHashTags.addEventListener('input', onValidInputHashTags);
 
@@ -257,6 +267,10 @@
     effectLevel.classList.remove('hidden');
     window.previewImage.style.filter = countProportion(filters[parameter - ARRAY_CORRECT], 100);
   };
+
+  effectsPreview.forEach(function (item) {
+    item.addEventListener('keydown', cancelDefaultEnter)
+  });
 
   imgUpLoadEffects.addEventListener('input', function (evt) {
     effectLevelPin.style.left = '100%';

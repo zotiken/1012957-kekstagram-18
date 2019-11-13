@@ -16,13 +16,13 @@
     return pictureNode;
   };
 
-  var sortPictureLikes = function (data) {
+  var sortByLikes = function (data) {
     data.sort(function (a, b) {
       return b.likes - a.likes;
     });
     return data;
   };
-  var sortPictureCommit = function (data) {
+  var sortByComments = function (data) {
     data.sort(function (a, b) {
       return b.comments.length - a.comments.length;
     });
@@ -53,7 +53,7 @@
   };
   var onGetDescriptionPhotos = function (data) {
     window.pictures = data.slice();
-    sortPictureLikes(window.pictures);
+    sortByLikes(window.pictures);
     updateGallery(window.pictures);
     imgFilters.classList.remove('img-filters--inactive');
   };
@@ -78,8 +78,8 @@
   };
   window.backend.load('https://js.dump.academy/kekstagram/data', onGetDescriptionPhotos, onErrorClose);
   window.gallery = {
-    sortPictureLikes: sortPictureLikes,
-    sortPictureCommit: sortPictureCommit,
+    sortByLikes: sortByLikes,
+    sortByComments: sortByComments,
     onCloseErrorEsc: onCloseErrorEsc,
     updateGallery: updateGallery,
     picturesBlock: picturesBlock
