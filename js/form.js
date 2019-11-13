@@ -125,10 +125,10 @@
 
 
   var cancelDefaultEnter = function (param) {
-    if (param.keyCode === ENTER_KEY_CODE ) {
+    if (param.keyCode === ENTER_KEY_CODE) {
       param.preventDefault();
     }
-  }
+  };
   textHashTags.addEventListener('keydown', cancelDefaultEnter);
 
   textHashTags.addEventListener('input', onValidInputHashTags);
@@ -269,7 +269,7 @@
   };
 
   effectsPreview.forEach(function (item) {
-    item.addEventListener('keydown', cancelDefaultEnter)
+    item.addEventListener('keydown', cancelDefaultEnter);
   });
 
   imgUpLoadEffects.addEventListener('input', function (evt) {
