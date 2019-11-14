@@ -53,7 +53,6 @@
           socialCommentLoader.classList.remove('visually-hidden', 'hidden');
         }
       }
-
     });
   };
 

@@ -59,4 +59,5 @@
   filtersForm.addEventListener('click', window.debounce(function (evt) {
     onFilterSelect(evt);
   }));
+
 })();

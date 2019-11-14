@@ -12,7 +12,6 @@
     pictureNode.querySelector('.picture__img').src = parameter.url;
     pictureNode.querySelector('.picture__likes').textContent = parameter.likes;
     pictureNode.querySelector('.picture__comments').textContent = parameter.comments.length;
-
     return pictureNode;
   };
 
@@ -34,7 +33,6 @@
       pictureElem.forEach(function (item, i) {
         picturesBlock.removeChild(pictureElem[i]);
       });
-
     }
   };
 
@@ -43,7 +41,6 @@
     data.forEach(function (item, i) {
       fragment.appendChild(generatePictureBlock(data[i]));
     });
-
     picturesBlock.appendChild(fragment);
   };
 
@@ -76,6 +73,7 @@
     });
     document.addEventListener('keydown', onCloseErrorEsc);
   };
+
   window.backend.load('https://js.dump.academy/kekstagram/data', onGetDescriptionPhotos, onErrorClose);
   window.gallery = {
     sortByLikes: sortByLikes,

@@ -2,7 +2,9 @@
 (function () {
   var ESC_KEY_CODE = 27;
   var ELEMENT_THREE_ARRAY = 2;
+
   var errorBlock = document.querySelector('#error').content.querySelector('.error');
+  var successPopUp = document.querySelector('#success').content.querySelector('.success');
 
   document.querySelector('.social__comment-count').classList.add('visually-hidden');
   document.querySelector('.comments-loader').classList.add('visually-hidden');
@@ -12,7 +14,6 @@
     window.errorNode.querySelector('.error__title').textContent = parameter;
     document.body.appendChild(window.errorNode);
   };
-  var successPopUp = document.querySelector('#success').content.querySelector('.success');
   var generateSuccessPopUpBlock = function () {
     var successPopUpBlock = successPopUp.cloneNode(true);
     document.body.appendChild(successPopUpBlock);
@@ -24,11 +25,9 @@
         });
       }
     };
-
     document.addEventListener('keydown', function (evt) {
       onRemoveSuccessPopUpBlock(evt);
     });
-
   };
 
   var onCloseSuccessPopUp = function (element) {

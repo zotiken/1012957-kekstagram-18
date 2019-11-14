@@ -4,7 +4,6 @@
   var ENTER_KEY_CODE = 13;
   var ELEMENT_ONE_ARRAY = 0;
   var ARRAY_CORRECT = 1;
-
   var SURFACING_STEP_THREE = 3;
 
   // filter index
@@ -18,7 +17,6 @@
   var effectsPreview = document.querySelectorAll('.effects__item');
   var imgUploadEffectLevel = document.querySelector('.img-upload__effect-level');
   var imgUploadForm = document.querySelector('.img-upload__form');
-
   var filters = [
     {
       name: 'grayscale',
@@ -123,14 +121,13 @@
     });
   };
 
-
   var cancelDefaultEnter = function (param) {
     if (param.keyCode === ENTER_KEY_CODE) {
       param.preventDefault();
     }
   };
-  textHashTags.addEventListener('keydown', cancelDefaultEnter);
 
+  textHashTags.addEventListener('keydown', cancelDefaultEnter);
   textHashTags.addEventListener('input', onValidInputHashTags);
 
   var lookForDuplicates = function (parameter) {
